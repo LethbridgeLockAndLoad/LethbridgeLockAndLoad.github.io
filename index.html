@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lethbridge Lock & Load | Premium Firearms</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    
+    <!-- Embedded CSS -->
+    <style>
+        /* Custom color scheme */
+        :root {
+            --primary: #2a2a2a;
+            --secondary: #c52d2f;
+            --light: #f4f4f4;
+            --dark: #1a1a1a;
+            --accent: #b89d60; /* Gold accent */
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        /* Navigation */
+        .navbar {
+            background-color: var(--primary);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-family: 'Georgia', serif;
+            text-transform: uppercase;
+            color: var(--accent) !important;
+        }
+        
+        .navbar-dark .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.85);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .navbar-dark .navbar-nav .nav-link:hover {
+            color: var(--accent);
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://placehold.co/1200x400/2a2a2a/cccccc?text=Premium+Firearms');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Product Cards */
+        .product-card {
+            border: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 30px;
+            background-color: white;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-card .card-title {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .product-card .card-text {
+            color: #666;
+        }
+        
+        .product-card .price {
+            font-weight: 700;
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+        
+        .product-card .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        /* Call to Action Buttons */
+        .btn-primary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+            font-weight: 600;
+            padding: 10px 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #a42425;
+            border-color: #a42425;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(197, 45, 47, 0.3);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .feature-box {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-box i {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        
+        .feature-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background-color: var(--light);
+        }
+        
+        .about h2 {
+            font-weight: 800;
+            margin-bottom: 30px;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .about h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .contact h2 {
+            font-weight: 800;
+            margin-bottom: 30px;
+            color: var(--primary);
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .contact h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 70px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .contact-info {
+            margin-bottom: 30px;
+        }
+        
+        .contact-info i {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-right: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 50px 0 20px;
+        }
+        
+        footer h5 {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        footer ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        footer ul li {
+            margin-bottom: 10px;
+        }
+        
+        footer ul li a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        footer ul li a:hover {
+            color: var(--accent);
+            text-decoration: none;
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            margin-right: 15px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        
+        /* Terms Modal */
+        .modal-content {
+            border-radius: 0;
+            border: none;
+        }
+        
+        .modal-header {
+            background-color: var(--primary);
+            color: white;
+            border-bottom: none;
+        }
+        
+        .modal-body {
+            padding: 30px;
+        }
+        
+        .terms-section {
+            margin-bottom: 20px;
+        }
+        
+        .terms-section h5 {
+            color: var(--secondary);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .april-fools-disclaimer {
+            background-color: #ffeaea;
+            border-left: 5px solid var(--secondary);
+            padding: 15px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--secondary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            z-index: 99;
+            transition: background-color 0.3s;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: #a42425;
+        }
+        
+        /* Newsletter Form */
+        .newsletter-form {
+            position: relative;
+        }
+        
+        .newsletter-form input {
+            padding-right: 50px;
+            border-radius: 50px;
+            height: 50px;
+        }
+        
+        .newsletter-form button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            border-radius: 50px;
+            height: 40px;
+            width: 40px;
+            background-color: var(--secondary);
+            border: none;
+        }
+        
+        /* Disclaimer */
+        .disclaimer-banner {
+            background-color: #ffeaea;
+            color: var(--secondary);
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Disclaimer Banner -->
+    <div class="disclaimer-banner">
+        <div class="container">
+            <p class="mb-0">⚠️This is a illegal buying from this website might get you in trouble and we wont be involved. Canada has controlled gun policies</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-shield-alt"></i> Lethbridge Lock & Load
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#featured">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Premium Firearms & Accessories</h1>
+            <p>Western Canada's premier destination for shooting enthusiasts, hunters, and collectors. Quality, selection, and expertise you can trust.</p>
+            <a href="#featured" class="btn btn-primary btn-lg">Browse Products</a>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="py-5" id="featured">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Featured Products</h2>
+                <p class="text-muted">Discover our most popular firearms and accessories</p>
+            </div>
+            
+            <div class="row">
+                <!-- Product 1 -->
+                <div class="col-md-4">
+                    <div class="product-card card h-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ5NPW1d1JevDRC3AiKuuILfe_Jd_PjqGvEA&s" class="card-img-top" alt="Tactical Precision Rifle">
+                        <div class="card-body">
+                            <h5 class="card-title">Tactical Precision Rifle</h5>
+                            <p class="card-text">Long-range performance with match-grade accuracy. Includes adjustable stock and premium optics mount.</p>
+                            <p class="price">$2,899.99</p>
+                            <a href="#product1" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="col-md-4">
+                    <div class="product-card card h-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYGeXR5NWHS1aavJd3BaiWgOtp5scJi5mpOA&s" class="card-img-top" alt="Home Defense Shotgun" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Home Defense Shotgun</h5>
+                            <p class="card-text">Reliable 12-gauge tactical shotgun with extended magazine capacity and ghost ring sights.</p>
+                            <p class="price">$899.99</p>
+                            <a href="#product2" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="col-md-4">
+                    <div class="product-card card h-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRESAe0cMD6OPq6qUzurp358MNvDEVVS2_fCw&s" class="card-img-top" alt="Compact EDC Pistol" style="height: 200px; object-fit: cover;">
+                        <div class="card-body">
+                            <h5 class="card-title">Compact EDC Pistol</h5>
+                            <p class="card-text">Lightweight 9mm with fiber optic sights, ergonomic grip, and match-grade trigger for concealed carry.</p>
+                            <p class="price">$649.99</p>
+                            <a href="#product3" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Second Row Products -->
+            <div class="row mt-4">
+                <!-- Product 4 -->
+                <div class="col-md-4">
+                    <div class="product-card card h-100">
+                        <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                            <svg width="150" height="150" viewBox="0 0 512 512">
+                                <circle fill="#222" cx="256" cy="256" r="100"/>
+                                <circle fill="#444" cx="256" cy="256" r="85"/>
+                                <circle fill="#666" cx="256" cy="256" r="70"/>
+                                <circle fill="#888" cx="256" cy="256" r="45"/>
+                                <circle fill="#aaa" cx="256" cy="256" r="20"/>
+                                <path fill="none" stroke="#222" stroke-width="2" d="M256 156v200M156 256h200"/>
+                            </svg>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Premium Red Dot Sight</h5>
+                            <p class="card-text">Military-grade red dot with 50,000-hour battery life, waterproof construction, and multi-coated lens.</p>
+                            <p class="price">$449.99</p>
+                            <a href="#product4" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="col-md-4">
+                    <div class="product-card card h-100">
+                        <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                            <svg width="150" height="150" viewBox="0 0 512 512">
+                                <rect fill="#555" x="156" y="216" width="200" height="80" rx="5" ry="5"/>
+                                <rect fill="#333" x="176" y="226" width="160" height="60" rx="2" ry="2"/>
+                                <path fill="#777" d="M181 236h150v40H181z"/>
+                                <path fill="#222" d="M356 246h10v20h-10zM146 246h10v20h-10z"/>
+                            </svg>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Tactical Gun Safe</h5>
+                            <p class="card-text">Secure storage solution with biometric access, fire protection, and reinforced steel construction.</p>
+                            <p class="price">$1,299.99</p>
+                            <a href="#product5" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="col-md-4">
+                    <div class="product-card card h-100">
+                        <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                            <svg width="150" height="150" viewBox="0 0 512 512">
+                                <rect fill="#333" x="206" y="176" width="100" height="160" rx="10" ry="10"/>
+                                <rect fill="#555" x="216" y="186" width="80" height="140" rx="5" ry="5"/>
+                                <path fill="#777" d="M226 196h60v120h-60z"/>
+                                <path fill="#222" d="M246 206h20v10h-20zM246 226h20v10h-20zM246 246h20v10h-20zM246 266h20v10h-20zM246 286h20v10h-20z"/>
+                            </svg>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">High-Capacity Magazine</h5>
+                            <p class="card-text">Polymer construction with anti-tilt follower, stainless steel spring, and enhanced grip texture.</p>
+                            <p class="price">$39.99</p>
+                            <a href="#product6" class="btn btn-primary">View Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Product Detail Sections -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <!-- Product 1 Detail -->
+            <div id="product1" class="row mb-5 pt-5">
+                <div class="col-md-6">
+                    <div class="carousel slide" id="product1Carousel" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJ5NPW1d1JevDRC3AiKuuILfe_Jd_PjqGvEA&s" class="d-block w-100" alt="Tactical Precision Rifle">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMAirjqR2NoLiKViwqxOID5rto0NoERc5d1g&s" class="d-block w-100" alt="Tactical Precision Rifle">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLYqqvoZm72dkpxZF4ScC0YFSmth-5ZzJW4g&s" class="d-block w-100" alt="Tactical Precision Rifle">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#product1Carousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#product1Carousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="mb-3">Tactical Precision Rifle</h2>
+                    <p class="price fs-3 text-danger mb-4">$2,899.99</p>
+                    <div class="mb-4">
+                        <h5>Product Description:</h5>
+                        <p>The Tactical Precision Rifle offers unparalleled accuracy and reliability for competitive shooters and law enforcement professionals. Featuring a match-grade barrel, adjustable stock, and premium optics mount, this rifle delivers consistent sub-MOA performance at extended ranges.</p>
+                        <ul class="list-group list-group-flush mb-3">
+                            <li class="list-group-item"><strong>Caliber:</strong> 6.5 Creedmoor</li>
+                            <li class="list-group-item"><strong>Barrel:</strong> 24" match-grade, fluted stainless steel</li>
+                            <li class="list-group-item"><strong>Action:</strong> Precision bolt action with 60° throw</li>
+                            <li class="list-group-item"><strong>Stock:</strong> Fully adjustable composite with cheek riser</li>
+                            <li class="list-group-item"><strong>Weight:</strong> 10.5 lbs (unloaded)</li>
+                            <li class="list-group-item"><strong>Includes:</strong> 10-round magazine, bipod, hard case</li>
+                        </ul>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary btn-lg">Add to Cart</button>
+                        <button class="btn btn-outline-secondary">Add to Wishlist</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 2 Detail -->
+            <div id="product2" class="row mb-5 pt-5">
+                <div class="col-md-6">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYGeXR5NWHS1aavJd3BaiWgOtp5scJi5mpOA&s" class="img-fluid mb-3" alt="Home Defense Shotgun">
+                </div>
+                <div class="col-md-6">
+                    <h2 class="mb-3">Home Defense Shotgun</h2>
+                    <p class="price fs-3 text-danger mb-4">$899.99</p>
+                    <div class="mb-4">
+                        <h5>Product Description:</h5>
+                        <p>This tactical shotgun offers reliable performance and maximum versatility for home defense scenarios. With its extended magazine capacity, ghost ring sights, and ergonomic controls, this shotgun delivers when it matters most.</p>
+                        <ul class="list-group list-group-flush mb-3">
+                            <li class="list-group-item"><strong>Gauge:</strong> 12 gauge</li>
+                            <li class="list-group-item"><strong>Capacity:</strong> 8+1 rounds</li>
+                            <li class="list-group-item"><strong>Barrel:</strong> 18.5" with chrome-lined bore</li>
+                            <li class="list-group-item"><strong>Sights:</strong> Ghost ring with fiber optic front</li>
+                            <li class="list-group-item"><strong>Stock:</strong> Synthetic pistol grip with recoil pad</li>
+                            <li class="list-group-item"><strong>Finish:</strong> Matte black</li>
+                        </ul>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary btn-lg">Add to Cart</button>
+                        <button class="btn btn-outline-secondary">Add to Wishlist</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 3 Detail -->
+            <div id="product3" class="row mb-5 pt-5">
+                <div class="col-md-6">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRESAe0cMD6OPq6qUzurp358MNvDEVVS2_fCw&s" class="img-fluid mb-3" alt="Compact EDC Pistol">
+                </div>
+                <div class="col-md-6">
+                    <h2 class="mb-3">Compact EDC Pistol</h2>
+                    <p class="price fs-3 text-danger mb-4">$649.99</p>
+                    <div class="mb-4">
+                        <h5>Product Description:</h5>
+                        <p>This lightweight, compact 9mm pistol is designed for everyday carry with concealment in mind. Featuring fiber optic sights, an ergonomic grip design, and match-grade trigger, this pistol delivers accuracy and reliability in a concealable package.</p>
+                        <ul class="list-group list-group-flush mb-3">
+                            <li class="list-group-item"><strong>Caliber:</strong> 9mm Luger</li>
+                            <li class="list-group-item"><strong>Capacity:</strong> 12+1 rounds</li>
+                            <li class="list-group-item"><strong>Barrel:</strong> 3.5" match-grade</li>
+                            <li class="list-group-item"><strong>Frame:</strong> Polymer with stainless steel chassis</li>
+                            <li class="list-group-item"><strong>Sights:</strong> Fiber optic front, adjustable rear</li>
+                            <li class="list-group-item"><strong>Includes:</strong> Two magazines, holster, cleaning kit</li>
+                        </ul>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary btn-lg">Add to Cart</button>
+                        <button class="btn btn-outline-secondary">Add to Wishlist</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Product 4-6 Detail sections would be added here following the same pattern -->
+            
+            <!-- Illegal Guns Section -->
+            <div id="illegal-guns" class="row mb-5 pt-5 border-top">
+                <div class="col-12 text-center mb-4">
+                    <h2 class="display-5 fw-bold">Illegal Firearms</h2>
+                    <p class="lead">Adding more illegal fun to Canada</p>
+                </div>
+                
+                <!-- Glock-19 -->
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNSB6JnIFfhEYA-AnXZcPXqBtxTK3FXJ6Vew&s" class="card-img-top" alt="Glock-19">
+                        <div class="card-body">
+                            <h5 class="card-title">Glock-19 Compact 9mm</h5>
+                            <p class="card-text">Ultra-reliable polymer-framed 9mm pistol featuring a 15-round capacity and versatile size suitable for concealed carry and duty use.</p>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item"><strong>Caliber:</strong> 9x19mm</li>
+                                <li class="list-group-item"><strong>Capacity:</strong> 15+1 rounds</li>
+                                <li class="list-group-item"><strong>Barrel:</strong> 4.02" (102mm)</li>
+                                <li class="list-group-item"><strong>Weight:</strong> 23.65 oz (670g) with magazine</li>
+                                <li class="list-group-item"><strong>Special Features:</strong> Safe Action® trigger system, front rail</li>
+                            </ul>
+                            <p class="price fs-4 text-danger">$729.99</p>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary btn-lg">Add to Cart</button>
+                                <button class="btn btn-outline-secondary">Add to Wishlist</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- AR-15 -->
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV_68OscgMvLPJucsd8OPbzaXHSH7SgZU2-g&s" class="card-img-top" alt="AR-15">
+                        <div class="card-body">
+                            <h5 class="card-title">Tactical AR-15 Platform Rifle</h5>
+                            <p class="card-text">Premium AR-15 with free-floating M-LOK handguard, enhanced trigger group, and adjustable stock for customizable fit and precision shooting.</p>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item"><strong>Caliber:</strong> 5.56 NATO/.223 Rem</li>
+                                <li class="list-group-item"><strong>Capacity:</strong> 30+1 rounds</li>
+                                <li class="list-group-item"><strong>Barrel:</strong> 16" with 1:8 twist</li>
+                                <li class="list-group-item"><strong>Weight:</strong> 6.5 lbs (unloaded)</li>
+                                <li class="list-group-item"><strong>Special Features:</strong> Full-length rail, mid-length gas system</li>
+                            </ul>
+                            <p class="price fs-4 text-danger">$1,499.99</p>
+                            <div class="d-grid gap-2">
+                                <button class="btn btn-primary btn-lg">Add to Cart</button>
+                                <button class="btn btn-outline-secondary">Add to Wishlist</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold">Why Choose Us</h2>
+                <p class="text-muted">Expert service and premium selection</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="feature-box">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Quality Assurance</h3>
+                        <p>We only stock premium firearms from trusted manufacturers with full warranties.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="feature-box">
+                        <i class="fas fa-user-shield"></i>
+                        <h3>Safety Training</h3>
+                        <p>Professional instruction from certified trainers for all experience levels.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="feature-box">
+                        <i class="fas fa-tools"></i>
+                        <h3>Gunsmith Services</h3>
+                        <p>Expert repairs, customization, and maintenance by certified gunsmiths.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <div class="feature-box">
+                        <i class="fas fa-certificate"></i>
+                        <h3>Price Matching</h3>
+                        <p>We'll match any authorized dealer's published price on identical items.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2>About Lethbridge Lock & Load</h2>
+                    <p>Established in the heart of Lethbridge, our shop caters to hunting enthusiasts, competitive shooters, and collectors seeking premium firearms and accessories.</p>
+                    <p>Our team brings over 30 years of combined experience in the firearms industry, ensuring expert guidance for both novice and experienced shooters alike.</p>
+                    <p>We pride ourselves on maintaining an extensive inventory of quality products while adhering to all provincial and federal regulations to ensure responsible firearm ownership.</p>
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#termsModal">Read Our Terms</a>
+                </div>
+                <div class="col-lg-6">
+                    <div class="bg-light p-4 text-center rounded">
+                        <svg width="400" height="300" viewBox="0 0 800 600">
+                            <!-- Storefront illustration -->
+                            <rect fill="#777" x="100" y="200" width="600" height="300"/>
+                            <rect fill="#555" x="130" y="230" width="540" height="270"/>
+                            <rect fill="#333" x="270" y="350" width="260" height="150"/>
+                            <rect fill="#222" x="280" y="360" width="240" height="130"/>
+                            <rect fill="#aaa" x="350" y="400" width="100" height="80"/>
+                            <text fill="#b89d60" x="400" y="175" text-anchor="middle" font-family="Georgia" font-size="24" font-weight="bold">LETHBRIDGE LOCK & LOAD</text>
+                            <text fill="#fff" x="400" y="310" text-anchor="middle" font-family="Arial" font-size="18">PREMIUM FIREARMS</text>
+                            <rect fill="#b89d60" x="100" y="500" width="600" height="20"/>
+                            <rect fill="#444" x="150" y="250" width="100" height="80"/>
+                            <rect fill="#444" x="550" y="250" width="100" height="80"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h2>Contact Us</h2>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> 123 Firearm Ave, Lethbridge, AB T1K 0A0</p>
+                        <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                        <p><i class="fas fa-envelope"></i> info@lethbridgelockandload.com</p>
+                        <p><i class="fas fa-clock"></i> Monday-Saturday: 9:00 AM - 6:00 PM<br>Sunday: Closed</p>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="bg-light p-4 rounded">
+                        <h4 class="mb-4">Send us a message</h4>
+                        <form id="contactForm">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#featured">Products</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Products</h5>
+                    <ul>
+                        <li><a href="#">Rifles</a></li>
+                        <li><a href="#">Shotguns</a></li>
+                        <li><a href="#">Handguns</a></li>
+                        <li><a href="#">Optics</a></li>
+                        <li><a href="#">Accessories</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h5>Newsletter</h5>
+                    <p>Subscribe to our newsletter for the latest products and promotions.</p>
+                    <form class="newsletter-form">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Your Email" required>
+                            <button class="btn" type="submit"><i class="fas fa-arrow-right"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Lethbridge Lock & Load. All rights reserved. | <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms & Conditions</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></a>
+
+    <!-- Terms and Conditions Modal -->
+    <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="april-fools-disclaimer">
+                        <h4 class="text-danger">⚠️ APRIL FOOLS' DAY DISCLAIMER ⚠️</h4>
+                        <p>This website is an April Fools' Day joke and is NOT a real firearms retailer. Lethbridge Lock & Load is a fictional company. No products are available for purchase, and no transactions can be processed.</p>
+                        <p>This website was created for entertainment purposes only. All product images, descriptions, and pricing are fictional. Any resemblance to real products or businesses is purely coincidental.</p>
+                        <p>Please observe all applicable laws regarding firearms and weapons in your jurisdiction.</p>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h5>1. Website Usage</h5>
+                        <p>This website is provided for entertainment purposes only. You may not use this website for any illegal or unauthorized purpose.</p>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h5>2. No Real Transactions</h5>
+                        <p>No real transactions can be processed through this website. Any forms or "purchase" options are non-functional and are part of the April Fools' Day joke.</p>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h5>3. Intellectual Property</h5>
+                        <p>All content on this website, including text, graphics, logos, and images, is for entertainment purposes only and may not be reproduced without permission.</p>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h5>4. Limitation of Liability</h5>
+                        <p>The creators of this website shall not be held liable for any damages arising from the use of this website or from the inability to use this website.</p>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h5>5. Applicable Law</h5>
+                        <p>This fictional website is intended to comply with all applicable laws. Please observe all applicable laws regarding firearms and weapons in your jurisdiction.</p>
+                    </div>
+                    
+                    <div class="terms-section">
+                        <h5>6. Contact Information</h5>
+                        <p>The contact information provided on this website is fictional and does not represent a real business or individuals.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Embedded JavaScript -->
+    <script>
+        // Back to Top Button Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTopButton = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', function(e) {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Contact Form Submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('This is a fake website for April Fools\' Day! No message was sent.');
+                    contactForm.reset();
+                });
+            }
+            
+            // Newsletter Form Submission
+            const newsletterForm = document.querySelector('.newsletter-form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('This is a fake website for April Fools\' Day! No newsletter subscription was processed.');
+                    newsletterForm.reset();
+                });
+            }
+            
+            // Cart Button Click (only show alert for cart buttons, not view details)
+            const cartButtons = document.querySelectorAll('.btn-primary');
+            cartButtons.forEach(button => {
+                // Only add alerts to "Add to Cart" buttons, not "View Details" which should navigate normally
+                if (button.textContent === 'Add to Cart') {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        alert('This is a fake website for April Fools\' Day! No products are actually for sale.');
+                    });
+                }
+            });
+            
+            // Add to Wishlist Button Click
+            const wishlistButtons = document.querySelectorAll('.btn-outline-secondary');
+            wishlistButtons.forEach(button => {
+                if (button.textContent === 'Add to Wishlist') {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        alert('This is a fake website for April Fools\' Day! No wishlist functionality exists.');
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
