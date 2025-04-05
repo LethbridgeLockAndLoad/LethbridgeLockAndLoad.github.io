@@ -368,7 +368,7 @@
     <!-- Disclaimer Banner -->
     <div class="disclaimer-banner">
         <div class="container">
-            <p class="mb-0">⚠️It is illegal buying from this website might get you in trouble and we wont be involved. Canada has controlled gun policies</p>
+            <p class="mb-0">⚠️ SECURE NOTICE: This is a dark web marketplace operating on the real net. We utilize Tor routing to protect your identity. For maximum security, always use a VPN when browsing. Your information is automatically encrypted and all transaction records are purged after processing.</p>
         </div>
     </div>
 
@@ -397,6 +397,12 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link position-relative" href="#" id="cartLink">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cartCount">0</span>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -573,7 +579,6 @@
                     </div>
                     <div class="d-grid gap-2">
                         <button class="btn btn-primary btn-lg">Add to Cart</button>
-                        <button class="btn btn-outline-secondary">Add to Wishlist</button>
                     </div>
                 </div>
             </div>
@@ -600,7 +605,6 @@
                     </div>
                     <div class="d-grid gap-2">
                         <button class="btn btn-primary btn-lg">Add to Cart</button>
-                        <button class="btn btn-outline-secondary">Add to Wishlist</button>
                     </div>
                 </div>
             </div>
@@ -627,7 +631,6 @@
                     </div>
                     <div class="d-grid gap-2">
                         <button class="btn btn-primary btn-lg">Add to Cart</button>
-                        <button class="btn btn-outline-secondary">Add to Wishlist</button>
                     </div>
                 </div>
             </div>
@@ -658,7 +661,6 @@
                             <p class="price fs-4 text-danger">$729.99</p>
                             <div class="d-grid gap-2">
                                 <button class="btn btn-primary btn-lg">Add to Cart</button>
-                                <button class="btn btn-outline-secondary">Add to Wishlist</button>
                             </div>
                         </div>
                     </div>
@@ -681,7 +683,6 @@
                             <p class="price fs-4 text-danger">$1,499.99</p>
                             <div class="d-grid gap-2">
                                 <button class="btn btn-primary btn-lg">Add to Cart</button>
-                                <button class="btn btn-outline-secondary">Add to Wishlist</button>
                             </div>
                         </div>
                     </div>
@@ -853,6 +854,78 @@
     <!-- Back to Top Button -->
     <a href="#" class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></a>
 
+    <!-- Shopping Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartModalLabel">Your Shopping Cart</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="cartEmpty" class="text-center py-5">
+                        <i class="fas fa-shopping-cart fa-3x mb-3 text-muted"></i>
+                        <h4>Your cart is empty</h4>
+                        <p class="text-muted">Add products to your cart to see them here.</p>
+                        <a href="#featured" class="btn btn-primary" data-bs-dismiss="modal">Browse Products</a>
+                    </div>
+                    
+                    <div id="cartItems" class="d-none">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="cartItemsList">
+                                <!-- Cart items will be added here dynamically -->
+                            </tbody>
+                        </table>
+                        
+                        <div class="d-flex justify-content-end">
+                            <div class="card mb-3" style="min-width: 300px;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Cart Summary</h5>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Subtotal:</span>
+                                        <span id="cartSubtotal">$0.00</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>GST/HST (5%):</span>
+                                        <span id="cartTax">$0.00</span>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>Shipping:</span>
+                                        <span>$25.00</span>
+                                    </div>
+                                    <hr>
+                                    <div class="d-flex justify-content-between fw-bold">
+                                        <span>Total:</span>
+                                        <span id="cartTotal">$0.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            <small>All firearms purchases require valid PAL/RPAL verification before shipping. Additional documentation will be requested during checkout.</small>
+                        </div>
+                        
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Continue Shopping</button>
+                            <button class="btn btn-primary" id="checkoutButton">Proceed to Checkout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Terms and Conditions Modal -->
     <div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -915,6 +988,145 @@
         document.addEventListener('DOMContentLoaded', function() {
             const backToTopButton = document.getElementById('backToTop');
             
+            // Cart functionality
+            let cart = [];
+            
+            // Format price to display as currency
+            function formatPrice(price) {
+                return '$' + parseFloat(price).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            }
+            
+            // Calculate cart totals
+            function calculateCartTotals() {
+                let subtotal = 0;
+                
+                cart.forEach(item => {
+                    subtotal += parseFloat(item.price) * item.quantity;
+                });
+                
+                const tax = subtotal * 0.05; // 5% GST/HST
+                const shipping = cart.length > 0 ? 25 : 0; // Shipping is $25 if cart is not empty
+                const total = subtotal + tax + shipping;
+                
+                document.getElementById('cartSubtotal').textContent = formatPrice(subtotal);
+                document.getElementById('cartTax').textContent = formatPrice(tax);
+                document.getElementById('cartTotal').textContent = formatPrice(total);
+                
+                return { subtotal, tax, shipping, total };
+            }
+            
+            // Render cart items in cart modal
+            function renderCartItems() {
+                const cartItemsList = document.getElementById('cartItemsList');
+                const cartEmpty = document.getElementById('cartEmpty');
+                const cartItems = document.getElementById('cartItems');
+                
+                // Clear current items
+                cartItemsList.innerHTML = '';
+                
+                if (cart.length === 0) {
+                    cartEmpty.classList.remove('d-none');
+                    cartItems.classList.add('d-none');
+                    return;
+                }
+                
+                cartEmpty.classList.add('d-none');
+                cartItems.classList.remove('d-none');
+                
+                // Add each item to the cart
+                cart.forEach((item, index) => {
+                    const row = document.createElement('tr');
+                    const itemTotal = parseFloat(item.price) * item.quantity;
+                    
+                    row.innerHTML = `
+                        <td>${item.title}</td>
+                        <td>${formatPrice(item.price)}</td>
+                        <td>
+                            <div class="input-group input-group-sm" style="max-width: 100px;">
+                                <button class="btn btn-outline-secondary decrease-quantity" data-index="${index}" type="button">-</button>
+                                <input type="text" class="form-control text-center" value="${item.quantity}" readonly>
+                                <button class="btn btn-outline-secondary increase-quantity" data-index="${index}" type="button">+</button>
+                            </div>
+                        </td>
+                        <td>${formatPrice(itemTotal)}</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-danger remove-item" data-index="${index}">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    `;
+                    
+                    cartItemsList.appendChild(row);
+                });
+                
+                // Add event listeners to quantity buttons and remove buttons
+                document.querySelectorAll('.decrease-quantity').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        if (cart[index].quantity > 1) {
+                            cart[index].quantity--;
+                            renderCartItems();
+                            calculateCartTotals();
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.increase-quantity').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        cart[index].quantity++;
+                        renderCartItems();
+                        calculateCartTotals();
+                    });
+                });
+                
+                document.querySelectorAll('.remove-item').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        cart.splice(index, 1);
+                        updateCartDisplay();
+                        renderCartItems();
+                        calculateCartTotals();
+                    });
+                });
+                
+                // Calculate totals
+                calculateCartTotals();
+            }
+            
+            // Update cart display
+            function updateCartDisplay() {
+                const cartCount = document.getElementById('cartCount');
+                if (cartCount) {
+                    let itemCount = 0;
+                    cart.forEach(item => {
+                        itemCount += item.quantity;
+                    });
+                    cartCount.textContent = itemCount;
+                }
+            }
+            
+            // Cart link click event
+            const cartLink = document.getElementById('cartLink');
+            if (cartLink) {
+                cartLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    renderCartItems();
+                    // Show cart modal
+                    const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
+                    cartModal.show();
+                });
+            }
+            
+            // Checkout button click event
+            const checkoutButton = document.getElementById('checkoutButton');
+            if (checkoutButton) {
+                checkoutButton.addEventListener('click', function() {
+                    const totals = calculateCartTotals();
+                    alert(`Thank you for your order! Your total is ${formatPrice(totals.total)}.\n\nThis is a fictional website for April Fools' Day. No real transactions will be processed.`);
+                });
+            }
+            
             window.addEventListener('scroll', function() {
                 if (window.pageYOffset > 300) {
                     backToTopButton.classList.add('show');
@@ -936,7 +1148,7 @@
             if (contactForm) {
                 contactForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    alert('This is a fake website for April Fools\' Day! No message was sent.');
+                    alert('Thank you for your message! We will get back to you shortly.');
                     contactForm.reset();
                 });
             }
@@ -946,30 +1158,50 @@
             if (newsletterForm) {
                 newsletterForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    alert('This is a fake website for April Fools\' Day! No newsletter subscription was processed.');
+                    alert('Thank you for subscribing to our newsletter!');
                     newsletterForm.reset();
                 });
             }
             
-            // Cart Button Click (only show alert for cart buttons, not view details)
+            // Cart Button Click
             const cartButtons = document.querySelectorAll('.btn-primary');
             cartButtons.forEach(button => {
-                // Only add alerts to "Add to Cart" buttons, not "View Details" which should navigate normally
+                // Only add functionality to "Add to Cart" buttons, not "View Details" which should navigate normally
                 if (button.textContent === 'Add to Cart') {
                     button.addEventListener('click', function(e) {
                         e.preventDefault();
-                        alert('This is a fake website for April Fools\' Day! No products are actually for sale.');
-                    });
-                }
-            });
-            
-            // Add to Wishlist Button Click
-            const wishlistButtons = document.querySelectorAll('.btn-outline-secondary');
-            wishlistButtons.forEach(button => {
-                if (button.textContent === 'Add to Wishlist') {
-                    button.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        alert('This is a fake website for April Fools\' Day! No wishlist functionality exists.');
+                        
+                        // Find the product title and price
+                        let productElement = button.closest('.col-md-6');
+                        if (!productElement) {
+                            productElement = button.closest('.card-body');
+                        }
+                        
+                        const productTitle = productElement.querySelector('h2, h5').textContent;
+                        let priceText = productElement.querySelector('.price, .fs-3, .fs-4').textContent;
+                        const price = priceText.replace(/[^0-9.]/g, '');
+                        
+                        // Check if product is already in cart
+                        let found = false;
+                        for (let i = 0; i < cart.length; i++) {
+                            if (cart[i].title === productTitle) {
+                                cart[i].quantity++;
+                                found = true;
+                                break;
+                            }
+                        }
+                        
+                        // Add to cart if not found
+                        if (!found) {
+                            cart.push({
+                                title: productTitle,
+                                price: price,
+                                quantity: 1
+                            });
+                        }
+                        
+                        updateCartDisplay();
+                        alert(`${productTitle} has been added to your cart!`);
                     });
                 }
             });
