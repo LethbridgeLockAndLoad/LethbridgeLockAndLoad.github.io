@@ -640,7 +640,7 @@
             <!-- Illegal Guns Section -->
             <div id="illegal-guns" class="row mb-5 pt-5 border-top">
                 <div class="col-12 text-center mb-4">
-                    <h2 class="display-5 fw-bold">Illegal Firearms</h2>
+                    <h2 class="display-5 fw-bold">Best selling</h2>
                     <p class="lead">Adding more illegal fun to Canada</p>
                 </div>
                 
@@ -809,6 +809,8 @@
             </div>
         </div>
     </section>
+
+    
 
     <!-- Footer -->
     <footer>
@@ -1008,11 +1010,15 @@
                 const shipping = cart.length > 0 ? 25 : 0; // Shipping is $25 if cart is not empty
                 const total = subtotal + tax + shipping;
                 
+                // Convert to Bitcoin (fake rate: 1 BTC = $40,000 USD)
+                const btcRate = 40000;
+                const btcTotal = (total / btcRate).toFixed(8);
+                
                 document.getElementById('cartSubtotal').textContent = formatPrice(subtotal);
                 document.getElementById('cartTax').textContent = formatPrice(tax);
-                document.getElementById('cartTotal').textContent = formatPrice(total);
+                document.getElementById('cartTotal').textContent = `${formatPrice(total)} (${btcTotal} BTC)`;
                 
-                return { subtotal, tax, shipping, total };
+                return { subtotal, tax, shipping, total, btcTotal };
             }
             
             // Render cart items in cart modal
@@ -1123,7 +1129,48 @@
             if (checkoutButton) {
                 checkoutButton.addEventListener('click', function() {
                     const totals = calculateCartTotals();
-                    alert(`Thank you for your order! Your total is ${formatPrice(totals.total)}.\n\nThis is a fictional website for April Fools' Day. No real transactions will be processed.`);
+                    const bitcoinAddress = '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa';
+                    
+                    const paymentHtml = `
+                        <div class="modal" id="bitcoinModal" tabindex="-1">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header bg-warning">
+                                        <h5 class="modal-title">Bitcoin Payment Required</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Please send exactly <strong>${totals.btcTotal} BTC</strong> to:</p>
+                                        <div class="alert alert-secondary">
+                                            <code>${bitcoinAddress}</code>
+                                        </div>
+                                        <div class="mt-3">
+                                            <label class="form-label">Enter Transaction ID to Verify Payment:</label>
+                                            <input type="text" class="form-control" id="txId">
+                                            <button class="btn btn-primary mt-2" onclick="verifyPayment()">Verify Payment</button>
+                                        </div>
+                                        <div id="paymentStatus" class="alert alert-danger mt-3 d-none">
+                                            Invalid transaction ID. Payment not verified. Please try again.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    document.body.insertAdjacentHTML('beforeend', paymentHtml);
+                    
+                    const bitcoinModal = new bootstrap.Modal(document.getElementById('bitcoinModal'));
+                    bitcoinModal.show();
+                    
+                    window.verifyPayment = function() {
+                        const statusDiv = document.getElementById('paymentStatus');
+                        statusDiv.classList.remove('d-none');
+                    };
+                    
+                    document.getElementById('bitcoinModal').addEventListener('hidden.bs.modal', function() {
+                        this.remove();
+                    });
                 });
             }
             
